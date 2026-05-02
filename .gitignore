@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+#aplication.properties -> cada dev tem o seu
+src/main/resources/application.properties
+
+#claude
