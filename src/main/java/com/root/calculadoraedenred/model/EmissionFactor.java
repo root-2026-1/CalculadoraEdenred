@@ -22,5 +22,5 @@ public class EmissionFactor {
     private PaymentType paymentType;
 
     @Column(nullable = false)
-    private Double co2GramsPerTransaction; // ex: PIX evita 15g, NFC evita 12g
+    private Double co2GramsPerTransaction; // // emissão GERADA por transação (não EVITADA)
 }
