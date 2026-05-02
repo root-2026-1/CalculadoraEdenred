@@ -4,6 +4,6 @@ public enum PaymentType {
     PIX,
     NFC,
     TED,
-    Physic,
+    PHYSICAL,
     UNKNOWN  // para o Cenário 3 — tipo não identificado
 }
