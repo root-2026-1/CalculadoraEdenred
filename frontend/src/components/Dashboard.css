@@ -1,0 +1,85 @@
+.dashboard {
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  text-align: left;
+}
+
+.dashboard-header h1 {
+  font-size: 32px;
+  letter-spacing: -0.5px;
+  margin: 0 0 4px;
+}
+
+.dashboard-header p {
+  color: var(--text);
+  margin: 0;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 20px 24px;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.filter-field input {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text-h);
+  font-size: 14px;
+  font-family: var(--sans);
+}
+
+.filter-field input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.dashboard-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dashboard-section h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.dashboard-loading {
+  text-align: center;
+  padding: 48px;
+  color: var(--text);
+}
+
+.dashboard-error {
+  padding: 16px;
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+}
+
+@media (max-width: 1024px) {
+  .dashboard {
+    padding: 24px 16px;
+    gap: 24px;
+  }
+}
