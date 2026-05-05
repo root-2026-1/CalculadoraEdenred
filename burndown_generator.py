@@ -29,7 +29,7 @@ query($login: String!, $projectNumber: Int!, $cursor: String) {
         pageInfo { hasNextPage endCursor }
         nodes {
           id
-          fieldValues(first: 20) {
+          fieldValues(first: 100) {
             nodes {
               ... on ProjectV2ItemFieldSingleSelectValue {
                 name
@@ -66,7 +66,7 @@ query($org: String!, $projectNumber: Int!, $cursor: String) {
         pageInfo { hasNextPage endCursor }
         nodes {
           id
-          fieldValues(first: 20) {
+          fieldValues(first: 100) {
             nodes {
               ... on ProjectV2ItemFieldSingleSelectValue {
                 name
@@ -322,8 +322,16 @@ def plot_burndown(title, real_dates, real_vals, all_dates, ideal_vals, total_poi
     all_nums   = mdates.date2num(all_dates)
     today_num  = mdates.date2num([datetime.now().date()])[0]
 
+    # --- NOVO BLOCO DE PREENCHIMENTO (AQUI) ---
     if real_vals:
-        ax.fill_between(real_nums, real_vals, alpha=0.12, color="#58a6ff", step="post")
+        if len(real_nums) > 1:
+            # 1. Preenche em formato de degrau até o penúltimo dia
+            ax.fill_between(real_nums[:-1], real_vals[:-1], alpha=0.12, color="#58a6ff", step="post")
+            # 2. Preenche em formato de rampa (reta) no último dia
+            ax.fill_between([real_nums[-2], real_nums[-1]], [real_vals[-2], real_vals[-1]], alpha=0.12, color="#58a6ff")
+        else:
+            ax.fill_between(real_nums, real_vals, alpha=0.12, color="#58a6ff")
+    # ------------------------------------------
 
     ax.plot(all_nums, ideal_vals, "--", color="#8b949e",
             linewidth=1.8, label="Ideal", alpha=0.85, zorder=2)
