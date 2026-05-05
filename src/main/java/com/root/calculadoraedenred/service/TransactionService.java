@@ -69,8 +69,17 @@ public class TransactionService {
                       && t.getPaymentType() != PaymentType.UNKNOWN)
             .count();
 
-        return new ScoreDTO(score, actualCO2, baselineCO2, co2Saved,
+        String label = resolveLabel(score);
+
+        return new ScoreDTO(score, label, actualCO2, baselineCO2, co2Saved,
             transactions.size(), digitalCount, startDate, endDate);
+    }
+
+    private String resolveLabel(double score) {
+        if (score < 25) return "Semente";
+        if (score < 50) return "Arbusto";
+        if (score < 75) return "Árvore";
+        return "Floresta";
     }
 
     private Map<PaymentType, Double> buildFactorMap() {

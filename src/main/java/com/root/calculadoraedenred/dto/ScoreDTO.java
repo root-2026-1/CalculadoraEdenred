@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ScoreDTO {
     private double score;
+    private String label;
     private double actualCO2;
     private double baselineCO2;
     private double co2Saved;

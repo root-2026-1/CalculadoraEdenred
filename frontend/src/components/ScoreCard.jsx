@@ -21,6 +21,7 @@ export default function ScoreCard({ score }) {
         <span className="score-value">{score.score.toFixed(1)}</span>
         <span className="score-label">/ 100</span>
       </div>
+      <div className="score-badge">{score.label}</div>
       <div className="score-details">
         <div className="score-stat">
           <span className="stat-value">{co2SavedKg} kg</span>

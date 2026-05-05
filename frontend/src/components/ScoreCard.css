@@ -60,6 +60,14 @@
   color: var(--text);
 }
 
+.score-badge {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 8px;
+  color: var(--text-h);
+  text-align: center;
+}
+
 .score-empty {
   padding: 24px;
   color: var(--text);
