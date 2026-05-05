@@ -45,7 +45,7 @@ query($login: String!, $projectNumber: Int!, $cursor: String) {
               state
               closedAt
               createdAt
-              labels(first: 20) {
+              labels(first: 100) {
                 nodes { name }
               }
             }
@@ -82,7 +82,7 @@ query($org: String!, $projectNumber: Int!, $cursor: String) {
               state
               closedAt
               createdAt
-              labels(first: 20) {
+              labels(first: 100) {
                 nodes { name }
               }
             }
@@ -288,11 +288,10 @@ def build_burndown(items, sprint_start, sprint_end, points_prefix):
 
     # Série real: só plota se a sprint já começou.
     # Usa local_date(done_at) para converter UTC → fuso local antes de comparar,
-    # evitando que tarefas concluídas à noite (ex: 22h em Recife = 01h UTC do dia seguinte)
-    # apareçam no dia errado.
+    # evitando que tarefas concluídas à noite apareçam no dia errado.
     real_dates = []
     real_vals  = []
-    if today >= sprint_start:
+    if today.date() >= sprint_start.date():
         current = sprint_start
         while current.date() <= min(sprint_end.date(), today.date()):
             remaining = sum(
@@ -320,37 +319,22 @@ def plot_burndown(title, real_dates, real_vals, all_dates, ideal_vals, total_poi
 
     real_nums  = mdates.date2num(real_dates)
     all_nums   = mdates.date2num(all_dates)
-    today_num  = mdates.date2num([datetime.now().date()])[0]
+    today_num  = mdates.date2num([datetime.now().astimezone().date()])[0]
 
-    # --- NOVO BLOCO DE PREENCHIMENTO (AQUI) ---
+    # Preenchimento azul transparente contínuo (sem formato de degrau)
     if real_vals:
-        if len(real_nums) > 1:
-            # 1. Preenche em formato de degrau até o penúltimo dia
-            ax.fill_between(real_nums[:-1], real_vals[:-1], alpha=0.12, color="#58a6ff", step="post")
-            # 2. Preenche em formato de rampa (reta) no último dia
-            ax.fill_between([real_nums[-2], real_nums[-1]], [real_vals[-2], real_vals[-1]], alpha=0.12, color="#58a6ff")
-        else:
-            ax.fill_between(real_nums, real_vals, alpha=0.12, color="#58a6ff")
-    # ------------------------------------------
+        ax.fill_between(real_nums, real_vals, alpha=0.12, color="#58a6ff")
 
+    # Linha tracejada ideal
     ax.plot(all_nums, ideal_vals, "--", color="#8b949e",
             linewidth=1.8, label="Ideal", alpha=0.85, zorder=2)
 
+    # Linha real desenhada em diagonal, conectando ponto a ponto
     if real_vals:
-        if len(real_nums) > 1:
-            # Plota a série até o penúltimo ponto com degrau
-            ax.step(real_nums[:-1], real_vals[:-1], where="post",
-                    color="#58a6ff", linewidth=2.5,
-                    marker="o", markersize=6,
-                    markerfacecolor="#58a6ff", zorder=3)
-            # Liga o penúltimo ao último com linha vertical simples
-            ax.plot([real_nums[-2], real_nums[-1]],
-                    [real_vals[-2], real_vals[-1]],
-                    color="#58a6ff", linewidth=2.5, zorder=3)
-        # Plota o último ponto (hoje) como marcador
-        ax.plot(real_nums[-1], real_vals[-1],
+        ax.plot(real_nums, real_vals,
+                color="#58a6ff", linewidth=2.5,
                 marker="o", markersize=6,
-                color="#58a6ff", markerfacecolor="#58a6ff",
+                markerfacecolor="#58a6ff",
                 label="Real (pontos restantes)", zorder=3)
 
     ax.axvline(today_num, color="#f78166", linestyle=":",
