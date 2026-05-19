@@ -30,7 +30,7 @@ jobs:
       - name: Instalar dependências
         run: pip install requests matplotlib numpy
 
-      - name: Gerar gráfico Sprint 1
+      - name: Gerar gráfico Sprint 2
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           TZ: "America/Recife"
@@ -39,17 +39,17 @@ jobs:
             --token        "$GH_TOKEN" \
             --login        "pedroRMQ" \
             --org          "root-2026-1" \
-            --project      3 \
-            --start        "2026-04-28" \
-            --end          "2026-05-12" \
+            --project      4 \
+            --start        "2026-05-14" \
+            --end          "2026-05-26" \
             --points-label "size " \
-            --output       burndown_sprint1.png
+            --output       burndown_sprint2.png
 
       - name: Commitar e publicar gráficos
         run: |
           git config --global user.name  "GitHub Action Bot"
           git config --global user.email "action@github.com"
-          git add -f burndown_sprint1.png 
+          git add -f burndown_sprint2.png 
           git commit -m "chore: atualiza burndown charts [skip ci]" || echo "Sem mudanças"
           git pull --rebase origin main
           git push
