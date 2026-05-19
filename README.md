@@ -16,6 +16,10 @@ Plataforma de sustentabilidade para a Edenred que rastreia o impacto ambiental d
 Burndown Sprint 1:
 ![Burndown Sprint 1](burndown_sprint1.png)
 
+### Sprint 2 (14/05 – 26/05)
+Burndown Sprint 2:
+![Burndown Sprint 2](burndown_sprint2.png)
+
 - [Burnup Sprint 1](https://github.com/orgs/root-2026-1/projects/2/insights/3): H1 e H2
 - [Burnup Sprint 2](https://github.com/orgs/root-2026-1/projects/2/insights/6): H3 e H4
 - [Burnup Sprint 3](https://github.com/orgs/root-2026-1/projects/2/insights/7): Épica
