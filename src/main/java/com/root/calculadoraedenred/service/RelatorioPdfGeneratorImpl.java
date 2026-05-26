@@ -73,7 +73,7 @@ public class RelatorioPdfGeneratorImpl implements RelatorioPdfGenerator {
             return out.toByteArray();
 
         } catch (Exception e) {
-            throw new RuntimeException("Erro ao gerar PDF", e);
+            throw new RelatorioGeracaoException("Erro ao gerar PDF" + e.getMessage());
         }
     }
 

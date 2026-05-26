@@ -1,11 +1,14 @@
 package com.root.calculadoraedenred.controller;
 
+import com.root.calculadoraedenred.exception.GlobalExceptionHandler;
+import com.root.calculadoraedenred.exception.RelatorioGeracaoException;
 import com.root.calculadoraedenred.service.CalculoEmissoesService;
 import com.root.calculadoraedenred.service.RelatorioExportacaoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -15,16 +18,15 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(CalculoController.class)
+@Import(GlobalExceptionHandler.class)
 class CalculoControllerExportacaoTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @MockBean
-    private CalculoEmissoesService calculoService;
 
     @MockBean
     private RelatorioExportacaoService exportacaoService;
@@ -66,5 +68,19 @@ class CalculoControllerExportacaoTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(invalido))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void retornaErroAoFalharGeracaoPdf() throws Exception {
+        when(exportacaoService.exportarPdf(any()))
+                .thenThrow(new RelatorioGeracaoException("falha"));
+
+        mockMvc.perform(post("/calculos/exportar")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(REQUEST_JSON))
+                .andExpect(status().isInternalServerError())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.message")
+                        .value("Não foi possível gerar o relatório. Tente novamente."));
     }
 }
