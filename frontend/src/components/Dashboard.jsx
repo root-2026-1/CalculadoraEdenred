@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchHistory, fetchScore, fetchImpact } from '../services/api';
+import { fetchHistory, fetchScore, fetchImpact, exportImpactReport } from '../services/api';
 import ScoreCard from './ScoreCard';
 import ImpactCard from './ImpactCard';
 import TransactionHistory from './TransactionHistory';
@@ -27,6 +27,23 @@ const PERIODS = [
   { value: 'yearly',  label: 'Ano'    },
 ];
 
+const EXPORT_ERROR_MESSAGE = 'Não foi possível gerar o relatório. Tente novamente.';
+
+function buildExportPayload(companyId, transactions) {
+  const counts = transactions.reduce((acc, transaction) => {
+    const key = transaction.paymentType || 'UNKNOWN';
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {});
+
+  const itens = Object.entries(counts).map(([paymentType, quantidade]) => ({
+    paymentType,
+    quantidade,
+  }));
+
+  return { empresaId: Number(companyId), itens };
+}
+
 export default function Dashboard() {
   const [companyId, setCompanyId] = useState('1');
   const [period, setPeriod] = useState('monthly');
@@ -35,6 +52,8 @@ export default function Dashboard() {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [exportLoading, setExportLoading] = useState(false);
+  const [exportError, setExportError] = useState(null);
 
   useEffect(() => {
     if (!companyId) return;
@@ -65,6 +84,27 @@ export default function Dashboard() {
     void load();
     return () => { cancelled = true; };
   }, [companyId, period]);
+
+  async function handleExport() {
+    setExportError(null);
+    setExportLoading(true);
+    try {
+      const payload = buildExportPayload(companyId, transactions);
+      const { blob, filename } = await exportImpactReport(payload);
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename || 'relatorio-impacto.pdf';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      setExportError(EXPORT_ERROR_MESSAGE);
+    } finally {
+      setExportLoading(false);
+    }
+  }
 
   return (
     <div className="dashboard">
@@ -105,7 +145,18 @@ export default function Dashboard() {
       {!loading && !error && (
         <>
           <section className="dashboard-section">
-            <h2>Impacto no período</h2>
+            <div className="export-bar">
+              <h2>Impacto no período</h2>
+              <button
+                type="button"
+                className="export-btn"
+                onClick={handleExport}
+                disabled={exportLoading}
+              >
+                {exportLoading ? 'Exportando...' : 'Exportar PDF'}
+              </button>
+            </div>
+            {exportError && <div className="export-error">{exportError}</div>}
             <ImpactCard impact={impact} />
           </section>
 

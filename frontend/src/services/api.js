@@ -20,3 +20,28 @@ export async function fetchImpact(companyId, period) {
   if (!res.ok) throw new Error(`Erro ao buscar impacto: ${res.status}`);
   return res.json();
 }
+
+export async function exportImpactReport(payload) {
+  const res = await fetch('/calculos/exportar', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    let message = 'Nao foi possivel gerar o relatorio. Tente novamente.';
+    try {
+      const data = await res.json();
+      if (data && data.message) message = data.message;
+    } catch {
+      // keep fallback message
+    }
+    throw new Error(message);
+  }
+
+  const blob = await res.blob();
+  const contentDisposition = res.headers.get('content-disposition') || '';
+  const match = contentDisposition.match(/filename="(.+?)"/i);
+  const filename = match ? match[1] : 'relatorio-impacto.pdf';
+  return { blob, filename };
+}
