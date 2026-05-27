@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { fetchHistory, fetchScore, fetchImpact, exportImpactReport } from '../services/api';
 import edenredLogo from '../assets/Edenred_Logo.svg';
+import notificacaoIcon from '../assets/notificacao.svg';
 import './Dashboard.css';
 
 // ── helpers ───────────────────────────────────────────────────────────────────
@@ -318,11 +319,7 @@ export default function Dashboard() {
             </div>
 
             <button className="fg-bell" aria-label="Notificações">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-              </svg>
-              <span className="fg-bell-dot" />
+              <img src={notificacaoIcon} width="36" height="36" alt="Notificações" />
             </button>
 
             <div className="fg-topbar-user">
@@ -330,7 +327,12 @@ export default function Dashboard() {
                 <span className="fg-user-name">João Silva</span>
                 <span className="fg-user-role">Gestor</span>
               </div>
-              <div className="fg-avatar">JS</div>
+              <div className="fg-avatar">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="5.3" r="2.65" fill="white"/>
+                  <path d="M3.3 13c0-2.6 2.1-4.7 4.7-4.7s4.7 2.1 4.7 4.7" stroke="white" strokeWidth="1.2" strokeLinecap="round" fill="none"/>
+                </svg>
+              </div>
             </div>
           </div>
         </header>
