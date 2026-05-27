@@ -16,6 +16,7 @@ import cenariosIcon from '../assets/CenariosIcon.svg';
 import relatorioIcon from '../assets/RelatorioIcon.svg';
 import metasIcon from '../assets/MetasIcon.svg';
 import configuracoesIcon from '../assets/ConfihuraçõesIcon.svg';
+import comparativoIcon from '../assets/ComparativoIcon.svg';
 import './Dashboard.css';
 
 // ── helpers ───────────────────────────────────────────────────────────────────
@@ -309,26 +310,7 @@ export default function Dashboard() {
         {/* CONTENT */}
         <main className="fg-content">
 
-          <div className="fg-toolbar">
-            <label className="fg-company-label">
-              Empresa ID:
-              <input
-                type="number"
-                value={companyId}
-                min="1"
-                onChange={e => setCompanyId(e.target.value)}
-                className="fg-company-input"
-              />
-            </label>
-            <div className="fg-export-group">
-              {exportError && <span className="fg-export-error">{exportError}</span>}
-              <button className="fg-export-btn" onClick={handleExport} disabled={exportLoading}>
-                {exportLoading ? 'Exportando…' : 'Exportar PDF'}
-              </button>
-            </div>
-          </div>
-
-          {loading && <div className="fg-loading">Carregando…</div>}
+{loading && <div className="fg-loading">Carregando…</div>}
           {error   && <div className="fg-error">{error}</div>}
 
           {!loading && !error && (
@@ -429,33 +411,31 @@ export default function Dashboard() {
               <div className="fg-bottom-row">
 
                 <div className="fg-col">
-                  <div className="fg-card">
+                  <div className="fg-card fg-card--comparativo">
                     <div className="fg-card-head">
                       <div>
-                        <div className="fg-card-title">Comparativo: hoje vs 100% digital</div>
-                        <div className="fg-card-sub">Impacto de transação média</div>
+                        <div className="fg-card-title fg-card-title--comparativo">Comparativo: hoje vs 100% digital</div>
+                        <div className="fg-card-sub fg-card-sub--comparativo">Impacto de transação média</div>
                       </div>
-                      {redPct > 0 && <span className="fg-badge-dark">{redPct}% de redução potencial</span>}
+                      {redPct > 0 && (
+                        <span className="fg-badge-reducao">
+                          <img src={comparativoIcon} alt="" width="15" height="14" />
+                          {redPct}% de redução potencial
+                        </span>
+                      )}
                     </div>
                     <div className="fg-compare-list">
-                      <div className="fg-compare-item">
-                        <span className="fg-compare-label">Hoje (físico + digital)</span>
-                        <div className="fg-compare-row">
-                          <div className="fg-compare-track">
-                            <div className="fg-compare-fill" style={{ width: `${(avgPhys / maxAvg) * 100}%` }} />
-                          </div>
-                          <span className="fg-compare-val">{fmtCo2(avgPhys)} CO₂</span>
-                        </div>
+                      <span className="fg-compare-label">Hoje (físico + digital)</span>
+                      <div className="fg-compare-track">
+                        <div className="fg-compare-fill" style={{ width: `${(avgPhys / maxAvg) * 100}%` }} />
                       </div>
-                      <div className="fg-compare-item">
-                        <span className="fg-compare-label">100% digital</span>
-                        <div className="fg-compare-row">
-                          <div className="fg-compare-track">
-                            <div className="fg-compare-fill fg-compare-fill--pink" style={{ width: `${(avgDig / maxAvg) * 100}%` }} />
-                          </div>
-                          <span className="fg-compare-val fg-compare-val--pink">{fmtCo2(avgDig)} CO₂</span>
-                        </div>
+                      <span className="fg-compare-val">{fmtCo2(avgPhys)} CO₂</span>
+
+                      <span className="fg-compare-label">100% digital</span>
+                      <div className="fg-compare-track">
+                        <div className="fg-compare-fill fg-compare-fill--pink" style={{ width: `${(avgDig / maxAvg) * 100}%` }} />
                       </div>
+                      <span className="fg-compare-val fg-compare-val--pink">{fmtCo2(avgDig)} CO₂</span>
                     </div>
                   </div>
 
