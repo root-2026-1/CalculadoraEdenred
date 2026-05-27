@@ -364,12 +364,12 @@ export default function Dashboard() {
             <>
               {/* KPI ROW */}
               <div className="fg-kpi-row">
-                <div className="fg-kpi-card">
+                <div className="fg-kpi-card fg-kpi-card--co2">
                   <span className="fg-kpi-label">CO₂ evitado no período</span>
                   <span className="fg-kpi-value">{fmtCo2(co2Grams)}</span>
                   <span className="fg-kpi-delta">{score ? `${digitalPct}% digital` : '—'}</span>
                 </div>
-                <div className="fg-kpi-card">
+                <div className="fg-kpi-card fg-kpi-card--digital">
                   <span className="fg-kpi-label">Transações digitais</span>
                   <span className="fg-kpi-value">{digitalTx.toLocaleString('pt-BR')}</span>
                   <span className="fg-kpi-delta">

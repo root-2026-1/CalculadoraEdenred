@@ -5,7 +5,7 @@
   z-index: 100;
   display: flex;
   background: #F5F7FA;
-  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Ubuntu', system-ui, sans-serif;
   font-size: 14px;
   color: #101727;
 }
@@ -110,10 +110,10 @@
 
 /* ── Topbar ──────────────────────────────────────────────────────────────── */
 .fg-topbar {
-  height: 68px;
-  min-height: 68px;
-  background: #fff;
-  border-bottom: 1px solid #E4E7EB;
+  height: 101px;
+  min-height: 101px;
+  background: #FFFFFF;
+  border-bottom: 0.8px solid #E5E7EB;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -125,19 +125,33 @@
 .fg-topbar-left {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  align-items: flex-start;
+  justify-content: space-between;
+  align-self: stretch;
+  padding-top: 25px;
+  padding-bottom: 26px;
+  padding-left: 2px;
+  padding-right: 1006.69px;
+  white-space: nowrap;
 }
 
 .fg-topbar-title {
-  font-size: 16px;
+  font-family: 'Ubuntu', sans-serif;
   font-weight: 700;
+  font-size: 18.6px;
   color: #101727;
-  letter-spacing: -0.2px;
+  line-height: 28px;
+  letter-spacing: 0;
+  white-space: nowrap;
 }
 
 .fg-topbar-crumb {
-  font-size: 12px;
-  color: #697282;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 400;
+  font-size: 12.9px;
+  color: rgb(105, 114, 130);
+  line-height: 20px;
+  letter-spacing: 0;
 }
 
 .fg-topbar-right {
@@ -294,9 +308,105 @@
   gap: 5px;
 }
 
+.fg-kpi-card--co2 {
+  box-sizing: border-box;
+  width: 388px;
+  height: 170px;
+  background: #FFFFFF;
+  border: 0.8px solid #F0F3F8;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.17);
+  border-radius: 22px;
+  padding: 24px 152.44px 24px 24px;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.fg-kpi-card--digital {
+  box-sizing: border-box;
+  width: 388px;
+  height: 170px;
+  background: #FFFFFF;
+  border: 0.8px solid #F0F3F8;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.17);
+  border-radius: 22px;
+  padding: 24px 188.07px 24px 27px;
+  gap: 20px;
+  align-items: flex-start;
+}
+
 .fg-kpi-label { font-size: 12px; color: #697282; font-weight: 500; }
 .fg-kpi-value { font-size: 28px; font-weight: 700; color: #101727; line-height: 1.1; letter-spacing: -0.4px; }
 .fg-kpi-delta { font-size: 12px; font-weight: 500; color: #F72717; }
+
+.fg-kpi-card--digital .fg-kpi-label {
+  display: block;
+  width: 100%;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 400;
+  font-size: 19px;
+  color: rgb(73, 85, 101);
+  line-height: 21.48px;
+  letter-spacing: 0;
+}
+
+.fg-kpi-card--co2 .fg-kpi-label {
+  display: block;
+  width: 100%;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 400;
+  font-size: 19px;
+  color: #4A5565;
+  line-height: 22.04px;
+  letter-spacing: 0;
+}
+
+.fg-kpi-card--digital .fg-kpi-value {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 700;
+  font-size: 44px;
+  color: rgb(16, 23, 39);
+  line-height: 38.67px;
+  letter-spacing: 0;
+}
+
+.fg-kpi-card--co2 .fg-kpi-value {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 700;
+  font-size: 44px;
+  color: #101828;
+  line-height: 39.67px;
+  letter-spacing: 0;
+}
+
+.fg-kpi-card--digital .fg-kpi-delta {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  color: rgb(247, 39, 23);
+  line-height: 17.19px;
+  letter-spacing: 0;
+}
+
+.fg-kpi-card--co2 .fg-kpi-delta {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 500;
+  font-size: 17px;
+  color: #F72717;
+  line-height: 17.63px;
+  letter-spacing: 0;
+}
 
 /* ── Mid row ─────────────────────────────────────────────────────────────── */
 .fg-mid-row {
@@ -407,6 +517,7 @@
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.17);
   border-radius: 22px;
 }
+
 .fg-co2type-list { display: flex; flex-direction: column; gap: 18px; }
 
 .fg-co2type-item { display: flex; align-items: center; gap: 13px; }
