@@ -376,7 +376,7 @@ export default function Dashboard() {
                     {totalTx > 0 ? `de ${totalTx.toLocaleString('pt-BR')} totais (${digitalPct}%)` : '—'}
                   </span>
                 </div>
-                <div className="fg-kpi-card">
+                <div className="fg-kpi-card fg-kpi-card--pct">
                   <span className="fg-kpi-label">Pagamento digital</span>
                   <span className="fg-kpi-value">{digitalPct}%</span>
                   <span className="fg-kpi-delta">{score ? 'do total de transações' : '—'}</span>
