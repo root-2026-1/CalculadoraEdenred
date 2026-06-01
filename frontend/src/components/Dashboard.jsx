@@ -712,7 +712,6 @@ export default function Dashboard() {
                           <div className="fg-card-head">
                             <div>
                               <div className="fg-card-title">Histórico de CO₂ evitado</div>
-                              <div className="fg-card-sub">{subtitle}</div>
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                               <button onClick={prevNav} disabled={prevDis} style={{ background: 'none', border: '1px solid #ddd', borderRadius: '6px', padding: '4px 10px', cursor: 'pointer', fontSize: '16px', lineHeight: 1 }}>‹</button>
