@@ -3,10 +3,13 @@ package com.root.calculadoraedenred.config;
 import com.root.calculadoraedenred.model.EmissionFactor;
 import com.root.calculadoraedenred.model.enums.PaymentType;
 import com.root.calculadoraedenred.repository.EmissionFactorRepository;
+import com.root.calculadoraedenred.repository.TransactionRepository;
+import com.root.calculadoraedenred.model.Transaction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -14,6 +17,7 @@ import java.util.List;
 public class DataInitializer implements CommandLineRunner {
 
     private final EmissionFactorRepository emissionFactorRepository;
+    private final TransactionRepository transactionRepository;
 
     // Fatores tropicalizados para o Brasil (matriz elétrica MCTI/SIRENE 2023: 38,5 kg CO2/MWh)
     private static final List<EmissionFactor> FATORES = List.of(
@@ -36,5 +40,41 @@ public class DataInitializer implements CommandLineRunner {
                     () -> emissionFactorRepository.save(fator)
                 );
         }
+
+        if (transactionRepository.count() > 0) {
+            return;
+        }
+
+        LocalDateTime baseDate = LocalDateTime.now();
+        List<Transaction> transacoes = List.of(
+            new Transaction(null, 1L, PaymentType.PIX, 150.00, baseDate.minusDays(24)),
+            new Transaction(null, 1L, PaymentType.NFC, 89.90, baseDate.minusDays(21)),
+            new Transaction(null, 1L, PaymentType.PIX, 45.00, baseDate.minusDays(18)),
+            new Transaction(null, 1L, PaymentType.NFC, 210.00, baseDate.minusDays(14)),
+            new Transaction(null, 1L, PaymentType.TED, 300.00, baseDate.minusDays(11)),
+            new Transaction(null, 1L, PaymentType.PIX, 78.50, baseDate.minusDays(8)),
+            new Transaction(null, 1L, PaymentType.PIX, 130.00, baseDate.minusDays(53)),
+            new Transaction(null, 1L, PaymentType.NFC, 95.00, baseDate.minusDays(46)),
+            new Transaction(null, 1L, PaymentType.NFC, 180.00, baseDate.minusDays(36)),
+            new Transaction(null, 2L, PaymentType.NFC, 320.50, baseDate.minusDays(23)),
+            new Transaction(null, 2L, PaymentType.TED, 1000.00, baseDate.minusDays(19)),
+            new Transaction(null, 2L, PaymentType.NFC, 450.00, baseDate.minusDays(12)),
+            new Transaction(null, 2L, PaymentType.PIX, 200.00, baseDate.minusDays(9)),
+            new Transaction(null, 3L, PaymentType.PIX, 47.30, baseDate.minusDays(22)),
+            new Transaction(null, 3L, PaymentType.PIX, 92.00, baseDate.minusDays(17)),
+            new Transaction(null, 3L, PaymentType.PIX, 61.50, baseDate.minusDays(10)),
+            new Transaction(null, 4L, PaymentType.TED, 200.00, baseDate.minusDays(24)),
+            new Transaction(null, 4L, PaymentType.TED, 350.00, baseDate.minusDays(21)),
+            new Transaction(null, 4L, PaymentType.NFC, 95.00, baseDate.minusDays(17)),
+            new Transaction(null, 4L, PaymentType.PIX, 60.00, baseDate.minusDays(13)),
+            new Transaction(null, 4L, PaymentType.NFC, 530.00, baseDate.minusDays(10)),
+            new Transaction(null, 4L, PaymentType.NFC, 275.00, baseDate.minusDays(7)),
+            new Transaction(null, 5L, PaymentType.PHYSICAL, 120.00, baseDate.minusDays(20)),
+            new Transaction(null, 5L, PaymentType.PHYSICAL,  85.50, baseDate.minusDays(15)),
+            new Transaction(null, 5L, PaymentType.UNKNOWN,   60.00, baseDate.minusDays(10)),
+            new Transaction(null, 5L, PaymentType.UNKNOWN,   95.00, baseDate.minusDays(5))
+        );
+
+        transactionRepository.saveAll(transacoes);
     }
 }
