@@ -31,6 +31,9 @@ class CalculoControllerExportacaoTest {
     @MockBean
     private RelatorioExportacaoService exportacaoService;
 
+    @MockBean
+    private CalculoEmissoesService calculoEmissoesService;
+
     private static final String REQUEST_JSON = """
             {
               "empresaId": 42,
