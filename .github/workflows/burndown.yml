@@ -35,7 +35,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           TZ: "America/Recife"
         run: |
-          python burndown_generator.py \
+          python burndown/burndown_generator.py \
             --token        "$GH_TOKEN" \
             --login        "pedroRMQ" \
             --org          "root-2026-1" \
@@ -43,13 +43,13 @@ jobs:
             --start        "2026-05-14" \
             --end          "2026-05-26" \
             --points-label "size " \
-            --output       burndown_sprint2.png
+            --output       burndown/burndown_sprint2.png
 
       - name: Commitar e publicar gráficos
         run: |
           git config --global user.name  "GitHub Action Bot"
           git config --global user.email "action@github.com"
-          git add -f burndown_sprint2.png 
+          git add -f burndown/burndown_sprint2.png
           git commit -m "chore: atualiza burndown charts [skip ci]" || echo "Sem mudanças"
           git pull --rebase origin main
           git push
