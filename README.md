@@ -66,6 +66,16 @@ spring.jpa.show-sql=true
 
 A aplicação sobe em `http://localhost:8080`.
 
+## Como rodar o frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+O frontend sobe em `http://localhost:5173`. O backend precisa estar rodando para as chamadas de API funcionarem.
+
 ## Estrutura do projeto
 
 O backend segue arquitetura em camadas. O fluxo de dependências é unidirecional: **Controller → Service → Repository → Model**.
