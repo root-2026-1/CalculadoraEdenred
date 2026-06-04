@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import edenredLogo from '../assets/Edenred_Logo.svg';
-import graficoIcon from '../assets/Grafico.svg';
-import calculadoraIcon from '../assets/Calculadora.svg';
-import alvoIcon from '../assets/Alvo.svg';
+import { useAuth } from '../../context/AuthContext';
+import edenredLogo from '../../assets/Edenred_Logo.svg';
+import graficoIcon from '../../assets/Grafico.svg';
+import calculadoraIcon from '../../assets/Calculadora.svg';
+import alvoIcon from '../../assets/Alvo.svg';
 import './Auth.css';
 
 const FEATURES = [

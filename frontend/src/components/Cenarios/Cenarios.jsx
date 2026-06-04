@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { listCenarios } from '../services/api';
+import { listCenarios } from '../../services/api';
 import './Cenarios.css';
 
 function formatDate(isoString) {
