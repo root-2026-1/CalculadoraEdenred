@@ -44,9 +44,9 @@ class SimulacaoControllerTest {
     @Test
     void retornaSimulacaoComEconomia() throws Exception {
         CalculoResponse atual = new CalculoResponse(42L, 980.0, 0.98, List.of(
-                new ItemDetalhamentoResponse(PaymentType.PHYSICAL, 1000L, 0.98, 980.0)));
+                new ItemDetalhamentoResponse(PaymentType.PHYSICAL, 1000L, 0.98, 980.0)), null);
         CalculoResponse simulado = new CalculoResponse(42L, 130.0, 0.13, List.of(
-                new ItemDetalhamentoResponse(PaymentType.PIX, 1000L, 0.13, 130.0)));
+                new ItemDetalhamentoResponse(PaymentType.PIX, 1000L, 0.13, 130.0)), null);
         SimulacaoResponse resposta = new SimulacaoResponse(
                 42L, atual, simulado, 850.0, 0.85, 86.73469387755102);
 

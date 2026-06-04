@@ -14,4 +14,5 @@ public class CalculoResponse {
     private Double totalEmissoesGramas;
     private Double totalEmissoesKg;
     private List<ItemDetalhamentoResponse> detalhamentoPorTipo;
+    private String periodoReferencia;
 }

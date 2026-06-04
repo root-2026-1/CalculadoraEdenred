@@ -20,4 +20,12 @@ public class CalculoRequest {
     @NotEmpty(message = "itens não pode ser vazio")
     @Valid
     private List<ItemCalculoRequest> itens;
+
+    private String periodoReferencia;
+
+    private String nomeEmpresa;
+    private Double co2Evitado;
+    private Double arvoresEquivalentes;
+    private Double scoreSustentabilidade;
+    private Double percentualDigital;
 }

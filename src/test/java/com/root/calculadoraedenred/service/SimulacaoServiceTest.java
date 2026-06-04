@@ -39,9 +39,9 @@ class SimulacaoServiceTest {
         );
 
         when(calculoEmissoesService.calcular(argThat(empresaIdAndPaymentTypes(42L, PaymentType.PHYSICAL))))
-                .thenReturn(new CalculoResponse(42L, 980.0, 0.98, List.of()));
+                .thenReturn(new CalculoResponse(42L, 980.0, 0.98, List.of(), null));
         when(calculoEmissoesService.calcular(argThat(empresaIdAndPaymentTypes(42L, PaymentType.PIX))))
-                .thenReturn(new CalculoResponse(42L, 130.0, 0.13, List.of()));
+                .thenReturn(new CalculoResponse(42L, 130.0, 0.13, List.of(), null));
 
         SimulacaoResponse resposta = simulacaoService.simular(request);
 
@@ -62,7 +62,7 @@ class SimulacaoServiceTest {
         );
 
         when(calculoEmissoesService.calcular(org.mockito.ArgumentMatchers.any()))
-                .thenReturn(new CalculoResponse(1L, 0.0, 0.0, List.of()));
+                .thenReturn(new CalculoResponse(1L, 0.0, 0.0, List.of(), null));
 
         SimulacaoResponse resposta = simulacaoService.simular(request);
 
@@ -80,9 +80,9 @@ class SimulacaoServiceTest {
         );
 
         when(calculoEmissoesService.calcular(argThat(empresaIdAndPaymentTypes(3L, PaymentType.PIX))))
-                .thenReturn(new CalculoResponse(3L, 130.0, 0.13, List.of()));
+                .thenReturn(new CalculoResponse(3L, 130.0, 0.13, List.of(), null));
         when(calculoEmissoesService.calcular(argThat(empresaIdAndPaymentTypes(3L, PaymentType.PHYSICAL))))
-                .thenReturn(new CalculoResponse(3L, 980.0, 0.98, List.of()));
+                .thenReturn(new CalculoResponse(3L, 980.0, 0.98, List.of(), null));
 
         SimulacaoResponse resposta = simulacaoService.simular(request);
 
@@ -99,7 +99,7 @@ class SimulacaoServiceTest {
         );
 
         when(calculoEmissoesService.calcular(org.mockito.ArgumentMatchers.any()))
-                .thenReturn(new CalculoResponse(99L, 0.0, 0.0, List.of()));
+                .thenReturn(new CalculoResponse(99L, 0.0, 0.0, List.of(), null));
 
         simulacaoService.simular(request);
 

@@ -4,6 +4,7 @@ import Layout from './components/Layout/Layout'
 import Dashboard from './components/Dashboard/Dashboard'
 import Simulador from './components/Simulador/Simulador'
 import Cenarios from './components/Cenarios/Cenarios'
+import Relatorios from './components/Relatorios/Relatorios'
 import Login from './components/Login/Login'
 import ProtectedRoute from './components/ProtectedRoute'
 import { useAuth } from './context/AuthContext'
@@ -29,7 +30,8 @@ export default function App() {
       >
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/simulador" element={<Simulador />} />
-        <Route path="/cenarios" element={<Cenarios />} />
+        <Route path="/cenarios"   element={<Cenarios />} />
+        <Route path="/relatorios" element={<Relatorios />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/dashboard" replace />} />

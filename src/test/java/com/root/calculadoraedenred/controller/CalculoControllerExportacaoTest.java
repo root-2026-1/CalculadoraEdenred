@@ -1,5 +1,6 @@
 package com.root.calculadoraedenred.controller;
 
+import com.root.calculadoraedenred.dto.CalculoRequest;
 import com.root.calculadoraedenred.exception.GlobalExceptionHandler;
 import com.root.calculadoraedenred.exception.RelatorioGeracaoException;
 import com.root.calculadoraedenred.service.CalculoEmissoesService;
@@ -13,6 +14,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import org.mockito.ArgumentCaptor;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -71,6 +74,25 @@ class CalculoControllerExportacaoTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(invalido))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void periodoReferenciaEPassadoAoService() throws Exception {
+        ArgumentCaptor<CalculoRequest> captor = ArgumentCaptor.forClass(CalculoRequest.class);
+        when(exportacaoService.exportarPdf(captor.capture())).thenReturn("%PDF".getBytes());
+
+        mockMvc.perform(post("/calculos/exportar")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "empresaId": 1,
+                                  "periodoReferencia": "Último mês (2026-06-01 a 2026-06-04)",
+                                  "itens": [{ "paymentType": "PIX", "quantidade": 10 }]
+                                }"""))
+                .andExpect(status().isOk());
+
+        assertEquals("Último mês (2026-06-01 a 2026-06-04)",
+                captor.getValue().getPeriodoReferencia());
     }
 
     @Test

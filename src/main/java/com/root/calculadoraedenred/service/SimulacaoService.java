@@ -16,10 +16,16 @@ public class SimulacaoService {
     }
 
     public SimulacaoResponse simular(SimulacaoRequest request) {
-        CalculoResponse atual = calculoEmissoesService.calcular(new CalculoRequest(
-                request.getEmpresaId(), request.getDistribuicaoAtual()));
-        CalculoResponse simulado = calculoEmissoesService.calcular(new CalculoRequest(
-                request.getEmpresaId(), request.getDistribuicaoSimulada()));
+        CalculoRequest reqAtual = new CalculoRequest();
+        reqAtual.setEmpresaId(request.getEmpresaId());
+        reqAtual.setItens(request.getDistribuicaoAtual());
+
+        CalculoRequest reqSimulado = new CalculoRequest();
+        reqSimulado.setEmpresaId(request.getEmpresaId());
+        reqSimulado.setItens(request.getDistribuicaoSimulada());
+
+        CalculoResponse atual    = calculoEmissoesService.calcular(reqAtual);
+        CalculoResponse simulado = calculoEmissoesService.calcular(reqSimulado);
 
         double economiaGramas = atual.getTotalEmissoesGramas() - simulado.getTotalEmissoesGramas();
         double percentualReducao = atual.getTotalEmissoesGramas() > 0

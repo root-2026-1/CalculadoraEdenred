@@ -132,7 +132,7 @@ export async function exportImpactReport(payload) {
   });
 
   if (!res.ok) {
-    let message = 'Nao foi possivel gerar o relatorio. Tente novamente.';
+    let message = 'Não foi possível gerar o relatório. Tente novamente.';
     try {
       const data = await res.json();
       if (data && data.message) message = data.message;

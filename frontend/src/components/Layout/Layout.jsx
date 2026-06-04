@@ -19,15 +19,16 @@ const NAV_ITEMS = [
   { label: 'Dashboard',     to: '/dashboard', icon: homeIcon },
   { label: 'Simulador',     to: '/simulador', icon: simuladorIcon },
   { label: 'Cenários',      to: '/cenarios',  icon: cenariosIcon },
-  { label: 'Relatórios',    to: null,         icon: relatorioIcon },
+  { label: 'Relatórios',    to: '/relatorios', icon: relatorioIcon },
   { label: 'Metas',         to: null,         icon: metasIcon },
   { label: 'Configurações', to: null,         icon: configuracoesIcon },
 ];
 
 const CRUMBS = {
-  '/dashboard': 'Dashboard',
-  '/simulador': 'Simulador',
-  '/cenarios':  'Cenários',
+  '/dashboard':  'Dashboard',
+  '/simulador':  'Simulador',
+  '/cenarios':   'Cenários',
+  '/relatorios': 'Relatórios',
 };
 
 const PERIODS = [
@@ -47,7 +48,7 @@ export default function Layout() {
   const { empresa, logout } = useAuth();
   const companyId = empresa?.id ?? '1';
   const location = useLocation();
-  const isDashboard = location.pathname === '/dashboard';
+  const showPeriodToggle = location.pathname === '/dashboard' || location.pathname === '/relatorios';
 
   const [score, setScore]               = useState(null);
   const [period, setPeriod]             = useState('monthly');
@@ -132,8 +133,8 @@ export default function Layout() {
             <span className="fg-topbar-crumb">{crumb}</span>
           </div>
           <div className="fg-topbar-right">
-            {/* Seletor de período — só no Dashboard */}
-            {isDashboard && (
+            {/* Seletor de período — Dashboard e Relatórios */}
+            {showPeriodToggle && (
               <div className="fg-tabs" role="group" aria-label="Período">
                 {PERIODS.map(p => (
                   <button

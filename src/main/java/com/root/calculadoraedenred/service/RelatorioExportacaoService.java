@@ -28,7 +28,7 @@ public class RelatorioExportacaoService {
         CalculoResponse relatorio = calculoService.calcular(request);
 
         try {
-            byte[] pdf = generator.gerar(relatorio);
+            byte[] pdf = generator.gerar(relatorio, request);
             if (pdf == null || pdf.length == 0) {
                 throw new RelatorioGeracaoException("Geração de PDF retornou conteúdo vazio.");
             }
