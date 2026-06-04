@@ -68,13 +68,17 @@ A aplicação sobe em `http://localhost:8080`.
 
 ## Estrutura do projeto
 
+O backend segue arquitetura em camadas. O fluxo de dependências é unidirecional: **Controller → Service → Repository → Model**.
+
 ```
 src/main/java/com/root/calculadoraedenred/
-├── controller/       # Endpoints REST
-├── service/          # Regras de negócio
-├── repository/       # Acesso ao banco de dados
-├── model/            # Entidades JPA
-│   └── enums/        # Enums (ex: PaymentType)
-└── dto/              # Objetos de transferência de dados
+├── controller/       # Recebe requisições HTTP e delega ao service
+├── service/          # Regras de negócio e validações
+├── repository/       # Interfaces Spring Data JPA (acesso ao banco)
+├── model/            # Entidades JPA persistidas no PostgreSQL
+│   └── enums/        # PaymentType (PIX, NFC, WALLET, QR_CODE, PHYSICAL) e Period
+├── dto/              # Objetos de transferência usados nas bordas da API
+├── exception/        # GlobalExceptionHandler e respostas de erro padronizadas
+└── config/           # CorsConfig e DataInitializer (seed de dados)
 ```
 
