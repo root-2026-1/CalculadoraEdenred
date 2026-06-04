@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useCallback } from 'react';
-import { saveScenario, listCenarios } from '../services/api';
+import { saveScenario, listCenarios } from '../../services/api';
 import './Simulador.css';
 
 // g CO₂ por transação (espelha DataInitializer do backend)
