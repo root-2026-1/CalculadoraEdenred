@@ -46,7 +46,7 @@ export default function Login() {
             <span className="login-brand-headline-2">Tome decisões melhores.</span>
           </h1>
           <p className="login-brand-sub">
-            Gestão inteligente de impacto ambiental para transações corporativas.
+            Gestão inteligente de impacto ambiental<br />para transações corporativas.
           </p>
 
           <ul className="login-features">
