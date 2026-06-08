@@ -37,8 +37,8 @@ public class TransactionService {
     private static final Map<PaymentType, Double> SCORE_WEIGHTS = new EnumMap<>(Map.of(
         PaymentType.PIX,      1.00,
         PaymentType.TED,      1.00,
-        PaymentType.QR,       1.00,
-        PaymentType.WALLET,   0.75,
+        PaymentType.QR,       0.00,
+        PaymentType.WALLET,   0.00,
         PaymentType.NFC,      0.40,
         PaymentType.PHYSICAL, 0.00,
         PaymentType.UNKNOWN,  0.00
