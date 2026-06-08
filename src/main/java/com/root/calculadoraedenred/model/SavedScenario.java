@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.root.calculadoraedenred.model.enums.CategoriaEstabelecimento;
 
 import java.time.LocalDateTime;
 
@@ -42,8 +43,9 @@ public class SavedScenario {
     @Column(length = 50)
     private String tipoMeio;
 
+    @Enumerated(EnumType.STRING)
     @Column(length = 80)
-    private String categoria;
+    private CategoriaEstabelecimento categoria;
 
     @Column(nullable = false)
     private LocalDateTime criadoEm;
