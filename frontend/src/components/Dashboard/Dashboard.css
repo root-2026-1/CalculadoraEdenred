@@ -145,26 +145,17 @@
 }
 
 .fg-sidebar-level-badge {
-  display: flex;
-  width: 59.34px;
-  height: 19.99px;
-  padding: 2px 7.8px 1.99px 8px;
+  display: inline-flex;
+  padding: 3px 10px;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
   background: #52B788;
-  flex-shrink: 0;
+  align-self: flex-start;
   margin-top: auto;
 }
 
 .fg-sidebar-level-badge-text {
-  display: flex;
-  width: 43.54px;
-  height: 16px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
   color: #fff;
   text-align: center;
   font-family: 'Inter', sans-serif;
@@ -172,6 +163,7 @@
   font-style: normal;
   font-weight: 700;
   line-height: 16px;
+  white-space: nowrap;
 }
 
 .fg-avatar {
