@@ -55,10 +55,12 @@
 }
 
 .auth-label {
-  font-family: 'Ubuntu', sans-serif;
-  font-size: var(--text-sm);
-  font-weight: 600;
-  color: #374151;
+  color: #000;
+  font-family: Ubuntu, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .auth-input {
@@ -147,16 +149,14 @@
 
 /* Painel esquerdo — marca + gradiente */
 .login-brand {
-  flex: 0 0 50%;
-  max-width: 50%;
+  flex: 0 0 52%;
+  max-width: 52%;
   min-width: 0;
   display: flex;
   align-items: flex-start;
-  /* top / right / bottom / left — left=122px e top=181px conforme o Figma */
-  padding: 181px 56px 48px 122px;
+  padding: 80px 56px 48px 100px;
   box-sizing: border-box;
   color: #fff;
-  /* Diagonal: rosa no canto inferior esquerdo → vermelho no canto superior direito */
   background: linear-gradient(to top right, #FF007D 0%, #F72717 100%);
 }
 
@@ -170,34 +170,45 @@
   color: #fff;
   letter-spacing: -0.5px;
 }
-.login-brand-headline-1 { font-size: 33px; font-weight: 500; line-height: 1.12; }
-.login-brand-headline-2 { font-size: 33px; font-weight: 800; line-height: 1.12; }
+.login-brand-headline-1,
+.login-brand-headline-2 {
+  color: #FFF;
+  font-family: Ubuntu, sans-serif;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
 
 .login-brand-sub {
-  font-size: var(--text-md);
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.92);
+  color: #FFF;
+  font-family: Ubuntu, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
   margin: 0 0 40px;
-  max-width: 340px;
+  max-width: 460px;
 }
 
 .login-features {
   list-style: none;
-  margin: 0;
+  margin: 70px 0 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 32px;
 }
 
-.login-feature { display: flex; align-items: center; gap: 16px; }
+.login-feature { display: flex; align-items: flex-start; gap: 16px; }
 
 .login-feature-icon {
   flex-shrink: 0;
-  width: 46px;
-  height: 46px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.18);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -205,18 +216,33 @@
 }
 
 .login-feature-text { display: flex; flex-direction: column; gap: 2px; }
-.login-feature-title { font-size: var(--text-lg); font-weight: 700; color: #fff; }
-.login-feature-desc  { font-size: var(--text-md); color: rgba(255, 255, 255, 0.88); }
+.login-feature-title {
+  color: #FFF;
+  font-family: Ubuntu, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 39.649px;
+}
+.login-feature-desc {
+  color: rgba(255, 255, 255, 0.80);
+  font-family: Ubuntu, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 33.041px;
+  white-space: nowrap;
+}
 
 /* Painel direito — formulário */
 .login-panel {
-  flex: 0 0 50%;
-  max-width: 50%;
+  flex: 0 0 48%;
+  max-width: 48%;
   min-width: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 40px 32px;
+  justify-content: flex-start;
+  padding: 40px 32px 40px 90px;
   box-sizing: border-box;
   background: #fff;
   overflow-y: auto;
@@ -229,19 +255,25 @@
   flex-direction: column;
 }
 
-.login-logo { height: 40px; align-self: flex-start; margin-bottom: 36px; }
+.login-logo { height: 100px; align-self: flex-start; margin-bottom: 36px; }
 
 .login-title {
-  font-family: 'Ubuntu', sans-serif;
-  font-size: 28px;
+  color: #000;
+  font-family: Ubuntu, sans-serif;
+  font-size: 32px;
+  font-style: normal;
   font-weight: 700;
-  color: #14181F;
+  line-height: normal;
   margin: 0 0 6px;
 }
 
 .login-sub {
-  font-size: var(--text-md);
   color: #6B7280;
+  font-family: Ubuntu, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
   margin: 0 0 26px;
 }
 
@@ -300,11 +332,13 @@
   width: 100%;
   border: none;
   border-radius: 10px;
-  padding: 14px 16px;
-  font-family: 'Ubuntu', sans-serif;
-  font-size: var(--text-lg);
-  font-weight: 700;
-  color: #fff;
+  padding: 8px 16px;
+  color: #FFF;
+  font-family: Ubuntu, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
   cursor: pointer;
   background: #F0281C;
   transition: filter 0.15s ease, opacity 0.15s ease;

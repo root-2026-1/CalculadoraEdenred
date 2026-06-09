@@ -29,7 +29,9 @@ public class CenarioService {
         entity.setNome(request.getNome());
         entity.setDescricao(request.getDescricao());
         entity.setTipoMeio(request.getTipoMeio());
-        entity.setCategoria(request.getCategoria());
+        entity.setCategoria(request.getCategoria() != null
+                ? com.root.calculadoraedenred.model.enums.CategoriaEstabelecimento.valueOf(request.getCategoria())
+                : null);
         entity.setEmpresaId(resultado.getEmpresaId());
         entity.setEmissoesAtuaisGramas(resultado.getCenarioAtual().getTotalEmissoesGramas());
         entity.setEmissoesSimuladasGramas(resultado.getCenarioSimulado().getTotalEmissoesGramas());
