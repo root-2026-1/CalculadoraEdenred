@@ -105,13 +105,13 @@ export default function Login() {
 
           <div className="login-row">
             <label className="login-toggle">
+              <span className="login-toggle-label">Manter logado</span>
               <input
                 type="checkbox"
                 checked={manterLogado}
                 onChange={e => setManter(e.target.checked)}
               />
               <span className="login-toggle-track"><span className="login-toggle-thumb" /></span>
-              <span className="login-toggle-label">Manter logado</span>
             </label>
             <a className="login-forgot" href="#" onClick={e => e.preventDefault()}>
               Esqueci minha senha
@@ -126,8 +126,8 @@ export default function Login() {
             Demo: <strong>tech@edenred.com</strong> · senha <strong>123456</strong>
           </p>
 
-          <p className="login-copyright">Edenred © 2026 — Plataforma de Sustentabilidade</p>
         </form>
+        <p className="login-copyright">Edenred © 2026 — Plataforma de Sustentabilidade</p>
       </main>
     </div>
   );
