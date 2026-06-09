@@ -142,9 +142,10 @@ public class TransactionService {
     }
 
     private String resolveLabel(double score) {
-        if (score <= 33.0) return "Semente";
-        if (score <= 66.0) return "Broto";
-        return "Árvore";
+        if (score <= 25.0) return "Aprendiz verde";
+        if (score <= 50.0) return "Amigo da natureza";
+        if (score <= 75.0) return "Defensor das florestas";
+        return "Herói ecológico";
     }
 
     private Map<PaymentType, Double> buildFactorMap() {
