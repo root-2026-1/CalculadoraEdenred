@@ -729,7 +729,8 @@
 .fg-card--progress {
   position: relative;
   padding-left: 24px;
-  min-height: 240px;
+  min-height: 232px;
+  align-self: start;
 }
 
 .fg-card-head--progress {
@@ -843,7 +844,7 @@
 
 .fg-prog-row {
   position: absolute;
-  bottom: 59px;
+  bottom: 56px;
   left: 185px;
   right: 22px;
   display: flex;
@@ -876,7 +877,7 @@
 
 .fg-prog-pct {
   position: absolute;
-  bottom: 72px;
+  bottom: 68px;
   right: 22px;
   font-family: 'Ubuntu', sans-serif;
   font-size: var(--text-sm);
@@ -901,7 +902,7 @@
   align-items: center;
   gap: 4px;
   position: absolute;
-  bottom: 32.61px;
+  bottom: 32px;
   left: 185px;
 }
 .fg-next-tag   {
