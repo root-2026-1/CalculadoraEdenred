@@ -36,7 +36,7 @@ public class CenarioResponse {
         r.setPercentualReducao(entity.getPercentualReducao());
         r.setDescricao(entity.getDescricao());
         r.setTipoMeio(entity.getTipoMeio());
-        r.setCategoria(entity.getCategoria());
+        r.setCategoria(entity.getCategoria() != null ? entity.getCategoria().name() : null);
         r.setCriadoEm(entity.getCriadoEm());
         return r;
     }
