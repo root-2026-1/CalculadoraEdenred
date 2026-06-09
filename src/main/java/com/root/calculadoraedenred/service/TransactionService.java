@@ -75,8 +75,15 @@ public class TransactionService {
         double somaGanhos = transactions.stream()
             .mapToDouble(t -> SCORE_WEIGHTS.getOrDefault(t.getPaymentType(), 0.0))
             .sum();
-        double score = transactions.isEmpty() ? 0.0
-            : Math.min(100, (somaGanhos / transactions.size()) * 100);
+        double score;
+        if (transactions.isEmpty()) {
+            LocalDate yearStart = LocalDate.of(endDate.getYear(), 1, 1);
+            boolean currentYearHasData = transactionRepository.existsByCompanyIdAndTransactionDateBetween(
+                companyId, yearStart.atStartOfDay(), endDate.atTime(LocalTime.MAX));
+            score = currentYearHasData ? 0.0 : scoreForLastYearWithData(companyId, endDate.getYear());
+        } else {
+            score = Math.min(100, (somaGanhos / transactions.size()) * 100);
+        }
 
         long digitalCount = transactions.stream()
             .filter(t -> t.getPaymentType() != PaymentType.PHYSICAL
@@ -117,11 +124,27 @@ public class TransactionService {
         return new ImpactDTO(co2, co2 / 21_000.0, co2 / 120.0, label, period.name().toLowerCase());
     }
 
+    private double scoreForLastYearWithData(Long companyId, int currentYear) {
+        for (int year = currentYear - 1; year >= currentYear - 10; year--) {
+            LocalDate jan1  = LocalDate.of(year, 1, 1);
+            LocalDate dec31 = LocalDate.of(year, 12, 31);
+            List<Transaction> prev = transactionRepository
+                .findByCompanyIdAndTransactionDateBetweenOrderByTransactionDateDesc(
+                    companyId, jan1.atStartOfDay(), dec31.atTime(LocalTime.MAX));
+            if (!prev.isEmpty()) {
+                double sum = prev.stream()
+                    .mapToDouble(t -> SCORE_WEIGHTS.getOrDefault(t.getPaymentType(), 0.0))
+                    .sum();
+                return Math.min(100, (sum / prev.size()) * 100);
+            }
+        }
+        return 0.0;
+    }
+
     private String resolveLabel(double score) {
-        if (score <= 15.0) return "Semente";
-        if (score <= 50.0) return "Arbusto";
-        if (score <= 85.0) return "Árvore";
-        return "Floresta";
+        if (score <= 33.0) return "Semente";
+        if (score <= 66.0) return "Broto";
+        return "Árvore";
     }
 
     private Map<PaymentType, Double> buildFactorMap() {

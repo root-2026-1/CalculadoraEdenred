@@ -12,4 +12,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     List<Transaction> findByCompanyIdAndTransactionDateBetweenOrderByTransactionDateDesc(
         Long companyId, LocalDateTime start, LocalDateTime end);
+
+    boolean existsByCompanyIdAndTransactionDateBetween(
+        Long companyId, LocalDateTime start, LocalDateTime end);
 }
