@@ -508,6 +508,7 @@
 .fg-kpi-card--digital .fg-kpi-label {
   display: block;
   width: 100%;
+  text-align: left;
   font-family: 'Ubuntu', sans-serif;
   font-weight: 400;
   font-size: var(--text-xl);
@@ -519,6 +520,7 @@
 .fg-kpi-card--co2 .fg-kpi-label {
   display: block;
   width: 100%;
+  text-align: left;
   font-family: 'Ubuntu', sans-serif;
   font-weight: 400;
   font-size: var(--text-xl);
@@ -579,6 +581,7 @@
 .fg-kpi-card--pct .fg-kpi-label {
   display: block;
   width: 100%;
+  text-align: left;
   font-family: 'Ubuntu', sans-serif;
   font-weight: 400;
   font-size: var(--text-xl);
