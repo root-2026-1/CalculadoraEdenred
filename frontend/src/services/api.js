@@ -1,6 +1,7 @@
 import { getToken } from './auth';
 
-const BASE = '/api/transactions';
+const BASE_URL = import.meta.env.VITE_API_URL || '';
+const BASE = `${BASE_URL}/api/transactions`;
 
 // Anexa o token JWT (quando houver). Hoje o token é mock; quando o backend
 // Spring Security entrar, este mesmo header já valida a requisição.
@@ -86,7 +87,7 @@ export async function fetchImpact(companyId, period) {
 }
 
 export async function saveScenario(nome, simulacao, extras = {}) {
-  const res = await fetch('/cenarios', {
+  const res = await fetch(`${BASE_URL}/cenarios`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ nome, simulacao, ...extras }),
@@ -105,13 +106,13 @@ export async function saveScenario(nome, simulacao, extras = {}) {
 }
 
 export async function listCenarios(companyId) {
-  const res = await fetch(`/cenarios?empresaId=${companyId}`);
+  const res = await fetch(`${BASE_URL}/cenarios?empresaId=${companyId}`);
   if (!res.ok) throw new Error(`Erro ao listar cenários: ${res.status}`);
   return res.json();
 }
 
 export async function fetchScenario(id) {
-  const res = await fetch(`/cenarios/${id}`, { headers: authHeaders() });
+  const res = await fetch(`${BASE_URL}/cenarios/${id}`, { headers: authHeaders() });
   if (!res.ok) {
     let message = `Erro ao buscar cenário: ${res.status}`;
     try {
@@ -126,7 +127,7 @@ export async function fetchScenario(id) {
 }
 
 export async function exportImpactReport(payload) {
-  const res = await fetch('/calculos/exportar', {
+  const res = await fetch(`${BASE_URL}/calculos/exportar`, {
     method: 'POST',
     headers: authHeaders({ 'Content-Type': 'application/json' }),
     body: JSON.stringify(payload),
